@@ -25,25 +25,10 @@ function getGroupedTotals() {
 }
 
 function renderStats() {
-  const shippingTotal = getCategoryTotal('Shipping');
-  const taxTotal = getCategoryTotal('Tax');
-  const grandTotal = getTotalSpent();
-  const partsOnlyTotal = getPartsOnlyTotal();
-  const grouped = getGroupedTotals();
-
-  const topCategory = Object.entries(grouped)
-    .filter(([category]) => category !== 'Shipping' && category !== 'Tax')
-    .sort((a, b) => b[1] - a[1])[0];
-
-  document.getElementById('parts-only-total').textContent = currency.format(partsOnlyTotal);
-  document.getElementById('shipping-total').textContent = currency.format(shippingTotal);
-  document.getElementById('tax-total').textContent = currency.format(taxTotal);
-  document.getElementById('grand-total').textContent = currency.format(grandTotal);
-
-  document.getElementById('parts-count').textContent = data.parts.length;
-  document.getElementById('installed-count').textContent = data.parts.filter(part => part.status === 'Installed').length;
-  document.getElementById('planned-count').textContent = data.parts.filter(part => part.status !== 'Installed').length;
-  document.getElementById('top-category').textContent = topCategory ? topCategory[0] : '—';
+  document.getElementById('parts-only-total').textContent = currency.format(getPartsOnlyTotal());
+  document.getElementById('shipping-total').textContent = currency.format(getCategoryTotal('Shipping'));
+  document.getElementById('tax-total').textContent = currency.format(getCategoryTotal('Tax'));
+  document.getElementById('grand-total').textContent = currency.format(getTotalSpent());
 }
 
 function renderParts() {
