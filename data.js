@@ -26,7 +26,8 @@ window.appData = {
     { name: 'Lock washer – lower 4WD (4)', category: 'Rear suspension', status: 'Bought', vendor: 'LMC', price: 5.20 },
     { name: 'Nut – stud (2)', category: 'Rear suspension', status: 'Bought', vendor: 'LMC', price: 3.10 },
     { name: 'Nut – lower 4WD (2)', category: 'Rear suspension', status: 'Bought', vendor: 'LMC', price: 2.60 },
-    { name: 'Shipping', category: 'Rear suspension', status: 'Bought', vendor: 'LMC', price: 49.75 },
-    { name: 'Tax', category: 'Rear suspension', status: 'Bought', vendor: 'LMC', price: 50.77 }
+
+    { name: 'LMC order shipping', category: 'Shipping', status: 'Bought', vendor: 'LMC', price: 49.75 },
+    { name: 'LMC order tax', category: 'Tax', status: 'Bought', vendor: 'LMC', price: 50.77 }
   ]
 };
