@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#01696f" />
+  <title>C10 Progress App</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Private build tracker</p>
+      <h1>1984 Chevy C10</h1>
+      <p class="subtitle">Street/strip project dashboard for progress, parts, cost, and decisions.</p>
+    </div>
+    <div class="header-actions">
+      <div class="phase-pill" id="current-phase">Front Suspension / Steering</div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">◐</button>
+    </div>
+  </header>
+
+  <nav class="tab-nav" aria-label="Sections">
+    <button class="tab-button active" data-tab="overview">Overview</button>
+    <button class="tab-button" data-tab="progress">Progress</button>
+    <button class="tab-button" data-tab="parts">Parts & Costs</button>
+    <button class="tab-button" data-tab="timeline">Timeline</button>
+    <button class="tab-button" data-tab="decisions">Decisions</button>
+  </nav>
+
+  <main id="main-content" class="main-grid">
+    <section class="tab-panel active" id="overview">
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span>Total spent</span>
+          <strong id="total-spent">$0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Truck fund left</span>
+          <strong id="fund-left">$0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Open decisions</span>
+          <strong id="open-decisions">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Latest update</span>
+          <strong id="latest-update">—</strong>
+        </article>
+      </div>
+
+      <div class="content-grid two-col">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Recent progress</h2>
+          </div>
+          <ul id="recent-progress" class="stack-list"></ul>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Top next jobs</h2>
+          </div>
+          <ul id="next-jobs" class="stack-list"></ul>
+        </article>
+      </div>
+
+      <div class="content-grid two-col">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Waiting / blocked</h2>
+          </div>
+          <ul id="blocked-items" class="stack-list"></ul>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Build areas</h2>
+          </div>
+          <ul id="build-areas" class="stack-list"></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="progress">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Build progress</h2>
+        </div>
+        <div class="triple-grid">
+          <div>
+            <h3>Done</h3>
+            <ul id="progress-done" class="stack-list"></ul>
+          </div>
+          <div>
+            <h3>In progress</h3>
+            <ul id="progress-inprogress" class="stack-list"></ul>
+          </div>
+          <div>
+            <h3>Next</h3>
+            <ul id="progress-next" class="stack-list"></ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="tab-panel" id="parts">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Parts & costs</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Part</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Vendor</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody id="parts-table"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="tab-panel" id="timeline">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Timeline</h2>
+        </div>
+        <ul id="timeline-list" class="timeline-list"></ul>
+      </article>
+    </section>
+
+    <section class="tab-panel" id="decisions">
+      <div class="content-grid two-col">
+        <article class="panel">
+          <div class="panel-head"><h2>Open</h2></div>
+          <ul id="decisions-open" class="stack-list"></ul>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><h2>Waiting</h2></div>
+          <ul id="decisions-waiting" class="stack-list"></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
