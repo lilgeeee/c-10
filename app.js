@@ -5,11 +5,45 @@ function getTotalSpent() {
   return data.parts.reduce((sum, part) => sum + Number(part.price || 0), 0);
 }
 
+function getCategoryTotal(categoryName) {
+  return data.parts
+    .filter(part => part.category === categoryName)
+    .reduce((sum, part) => sum + Number(part.price || 0), 0);
+}
+
+function getPartsOnlyTotal() {
+  return data.parts
+    .filter(part => part.category !== 'Shipping' && part.category !== 'Tax')
+    .reduce((sum, part) => sum + Number(part.price || 0), 0);
+}
+
+function getGroupedTotals() {
+  return data.parts.reduce((acc, part) => {
+    acc[part.category] = (acc[part.category] || 0) + Number(part.price || 0);
+    return acc;
+  }, {});
+}
+
 function renderStats() {
-  document.getElementById('total-spent').textContent = currency.format(getTotalSpent());
+  const shippingTotal = getCategoryTotal('Shipping');
+  const taxTotal = getCategoryTotal('Tax');
+  const grandTotal = getTotalSpent();
+  const partsOnlyTotal = getPartsOnlyTotal();
+  const grouped = getGroupedTotals();
+
+  const topCategory = Object.entries(grouped)
+    .filter(([category]) => category !== 'Shipping' && category !== 'Tax')
+    .sort((a, b) => b[1] - a[1])[0];
+
+  document.getElementById('parts-only-total').textContent = currency.format(partsOnlyTotal);
+  document.getElementById('shipping-total').textContent = currency.format(shippingTotal);
+  document.getElementById('tax-total').textContent = currency.format(taxTotal);
+  document.getElementById('grand-total').textContent = currency.format(grandTotal);
+
   document.getElementById('parts-count').textContent = data.parts.length;
   document.getElementById('installed-count').textContent = data.parts.filter(part => part.status === 'Installed').length;
   document.getElementById('planned-count').textContent = data.parts.filter(part => part.status !== 'Installed').length;
+  document.getElementById('top-category').textContent = topCategory ? topCategory[0] : '—';
 }
 
 function renderParts() {
@@ -25,11 +59,7 @@ function renderParts() {
 }
 
 function renderCategoryTotals() {
-  const totals = data.parts.reduce((acc, part) => {
-    acc[part.category] = (acc[part.category] || 0) + Number(part.price || 0);
-    return acc;
-  }, {});
-
+  const totals = getGroupedTotals();
   const items = Object.entries(totals)
     .sort((a, b) => b[1] - a[1])
     .map(([category, total]) => `<strong>${category}</strong><div class="meta">${currency.format(total)}</div>`);
