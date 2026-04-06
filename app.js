@@ -1,5 +1,23 @@
-const data = window.appData;
+const STORAGE_KEY = 'c10-parts-tracker-data-v1';
+const starterData = window.appData;
 const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+let data = loadData();
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return structuredClone(starterData);
+    const parsed = JSON.parse(saved);
+    if (!parsed || !Array.isArray(parsed.parts)) return structuredClone(starterData);
+    return parsed;
+  } catch (error) {
+    return structuredClone(starterData);
+  }
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
 
 function getTotalSpent() {
   return data.parts.reduce((sum, part) => sum + Number(part.price || 0), 0);
@@ -79,11 +97,23 @@ function setupForm() {
       vendor: form.get('vendor'),
       price: Number(form.get('price'))
     });
+    saveData();
     rerenderAll();
     e.target.reset();
+  });
+}
+
+function setupReset() {
+  document.getElementById('reset-data').addEventListener('click', () => {
+    const confirmed = window.confirm('Reset the tracker back to the starter parts list?');
+    if (!confirmed) return;
+    data = structuredClone(starterData);
+    saveData();
+    rerenderAll();
   });
 }
 
 rerenderAll();
 setupTheme();
 setupForm();
+setupReset();
