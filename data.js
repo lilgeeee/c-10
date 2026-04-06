@@ -10,7 +10,6 @@ window.appData = {
     { name: 'Performance Online disc brake dust shields', category: 'Front suspension / steering', status: 'Bought', vendor: 'Performance Online', price: 55.80 },
     { name: 'Performance Online wheel bearing, inner', category: 'Front suspension / steering', status: 'Bought', vendor: 'Performance Online', price: 16.54 },
     { name: 'Performance Online wheel bearing, outer', category: 'Front suspension / steering', status: 'Bought', vendor: 'Performance Online', price: 16.54 },
-    
     { name: 'Frame sand blast', category: 'Front suspension / steering', status: 'Bought', vendor: 'Local service', price: 700.00 },
     { name: 'Frame paint', category: 'Front suspension / steering', status: 'Bought', vendor: 'Paint/materials', price: 529.70 },
 
