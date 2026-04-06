@@ -1,0 +1,9 @@
+{
+  "name": "C10 Progress App",
+  "short_name": "C10 Progress",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#01696f",
+  "description": "Private Chevy C10 build progress tracker."
+}
